@@ -56,10 +56,6 @@ def temp(name, regexp, process=None):
     return TokenTemplate(name, regexp, process)
 
 
-def process_identifier(value):
-    print(value)
-    return value
-
 
 def lex(string: str, lexer: list[TokenTemplate]):
     start = 0
