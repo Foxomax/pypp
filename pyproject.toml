@@ -1,0 +1,10 @@
+[project]
+name = "pypp"
+version = "0.1.0"
+description = "Py++ is a language writed in python, Py++ is a strict language compiled"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+members = [
+    "compiler/lexer"
+]

@@ -1,0 +1,6 @@
+
+
+fn main() -> void {
+   let hello: string = "HELLO WORLD";
+   print(hello);
+}
