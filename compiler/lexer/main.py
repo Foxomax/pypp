@@ -1,5 +1,5 @@
 import re
-
+from typing import Optional, Callable, Any
 
 KEYWORDS = {
     "fn": "FN",
@@ -27,13 +27,13 @@ class Token:
         return '(' + self.name + ', "' + str(self.value) + '"' + ')'
 
 class TokenTemplate:
-    def __init__(self, name, regexp, process=None):
+    def __init__(self, name: str, regexp: str, process: Optional[Callable[[str], Any]] = None):
         self.name = name
         r = re.compile(regexp)
         self.regexp = r
         self.process = process
 
-    def match(self, string, start, line,col):
+    def match(self, string: str, start: int, line: int, col: int):
         matched = self.regexp.match(string, start)
         if not matched:
             return False
@@ -52,9 +52,12 @@ class TokenTemplate:
 
         return Token(self.name, value, start, end, line,col)
 
-def temp(name, regexp, process=None):
+def temp(
+    name: str,
+    regexp: str,
+    process: Optional[Callable[[str], Any]] = None
+) -> TokenTemplate:
     return TokenTemplate(name, regexp, process)
-
 
 
 def lex(string: str, lexer: list[TokenTemplate]):
