@@ -5,6 +5,9 @@ description = "Py++ is a language writed in python, Py++ is a strict language co
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
+
+[tool.uv.workspace]
 members = [
-    "compiler/lexer"
+    "compiler/parser",
+    "compiler/lexer",
 ]

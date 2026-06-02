@@ -60,7 +60,7 @@ def temp(
     return TokenTemplate(name, regexp, process)
 
 
-def lex(string: str, lexer: list[TokenTemplate]):
+def lex(string: str, lexer: list[TokenTemplate]) -> list[Token]:
     start = 0
     tokens = []
     line = 1
@@ -138,13 +138,5 @@ LEXERS = [
     temp("DOT", r"\."),
 ]
 
-if __name__ == "__main__":
-    language = \
-        """
-        fn main() -> void {
-           let hello: string = "HELLO WORLD";
-           print(hello);
-        }
-        """
-
-    print(lex(language, LEXERS))
+def parse(language: str) -> list[Token]:
+    return lex(language, LEXERS)
