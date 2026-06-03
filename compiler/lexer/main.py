@@ -128,7 +128,7 @@ def tokenize(language: str):
     return tokenizer(language, LEXERS)
 
 
-# This implementation is created about this:
+# This implementation was created with the following reference:
 # https://lark-parser.readthedocs.io/en/stable/examples/advanced/custom_lexer.html#sphx-glr-examples-advanced-custom-lexer-py
 class TypeLexer(Lexer):
     def __init__(self, lexer_conf=None):

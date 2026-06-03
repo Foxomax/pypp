@@ -2,22 +2,22 @@
 
 ## A strictly-typed language compiled to optimized bytecode, written in Python.
 
-Py++ no intenta reinventar la rueda, sino resolver las limitaciones de rendimiento del tipado dinámico en Python moderno.
+Py++ does not attempt to reinvent the wheel; instead, it aims to overcome the performance limitations of dynamic typing in modern Python.
 
-Al introducir un sistema de **tipado estático estricto**, Py++ elimina el overhead de la inferencia de tipos en tiempo de ejecución. En bucles críticos, esto permite omitir por completo las comprobaciones dinámicas recurrentes, logrando un incremento masivo en la velocidad de ejecución.
+By introducing a **strict static typing system**, Py++ eliminates runtime type inference overhead. In critical loops, this allows the virtual machine to completely bypass recurring dynamic type checks, resulting in a massive increase in execution speed.
 
-### Roadmap de Compilación
-* **Fase 1 (Actual):** Transpilación directa a código fuente de Python, delegando temporalmente la generación de bytecode a CPython y abstrayendo el manejo de errores mediante Source Mapping.
-* **Fase 2 (Futuro):** Compilación directa a Bytecode optimizado (`.pyc` especializado para el *Adaptive Interpreter* o un formato binario propietario), puenteando el frontend de Python para optimizar la ejecución nativa en la máquina virtual.
+### Compilation Roadmap
+* **Phase 1 (Current):** Direct transpilation to Python source code, temporarily delegating bytecode generation to CPython and abstracting error handling via Source Mapping.
+* **Phase 2 (Future):** Direct compilation to optimized bytecode (specialized `.pyc` for the Adaptive Interpreter or a proprietary binary format), bypassing the Python frontend to optimize native execution in the virtual machine.
 
 ---
 
-## Sintaxis
+## Syntax
 
-Py++ utiliza una sintaxis fuertemente tipada con delimitadores explícitos y finalización de sentencias mediante punto y coma (`;`).
+Py++ utilizes a strongly-typed syntax with explicit delimiters and statement termination via semicolons (`;`).
 
 ```python
-def main() -> void {
+fn main() -> void {
     let hello: string = "HELLO";
     print(hello);
 }
