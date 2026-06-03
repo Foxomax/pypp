@@ -1,5 +1,5 @@
-from .main import parse
+from .main import TypeLexer
 
 __all__ = [
-    "parse"
+    "TypeLexer",
 ]
