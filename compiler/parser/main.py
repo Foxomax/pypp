@@ -4,7 +4,7 @@ from compiler.ast import AstBuilder
 
 
 SOURCE_CODE = """
-fn main(hola: string) -> void {
+def main(hola: string) -> void {
     let hello: string = "HELLO";
 }  
 """
@@ -12,7 +12,7 @@ fn main(hola: string) -> void {
 GRAMMAR = r"""
 start: function*
 
-function: _FN IDENTIFIER _LPAREN parameters* _RPAREN _ARROW return_type block
+function: _DEF IDENTIFIER _LPAREN parameters* _RPAREN _ARROW return_type block
 
 block: _LBRACE statement* _RBRACE
 
@@ -29,7 +29,7 @@ expression: STRING
 return_type: VOID
            | type
 
-%declare _FN
+%declare _DEF
 %declare IDENTIFIER
 %declare _LPAREN
 %declare _RPAREN
@@ -54,6 +54,7 @@ def main():
     )
 
     tree = parser.parse(SOURCE_CODE)
+    print(tree.pretty())
     ast = AstBuilder().transform(tree)
     print(ast)
 

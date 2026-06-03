@@ -4,7 +4,7 @@ from lark import Token as LarkToken
 from lark.lexer import Lexer, LexerState
 
 KEYWORDS = {
-    "fn": "_FN",
+    "def": "_DEF",
     "let": "_LET",
     "const": "CONST",
     "return": "RETURN",

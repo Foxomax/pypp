@@ -1,6 +1,6 @@
 
 
-fn main() -> void {
+def main() -> void {
    let hello: string = "HELLO WORLD";
    print(hello);
 }
