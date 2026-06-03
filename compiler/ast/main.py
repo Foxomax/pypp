@@ -5,7 +5,6 @@ from lark import Transformer
 
 
 def indent(text: str, spaces: int = 4) -> str:
-    """Indenta dinámicamente cada línea de un bloque de texto."""
     return textwrap.indent(text, " " * spaces)
 
 
