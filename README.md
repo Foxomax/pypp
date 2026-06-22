@@ -17,7 +17,7 @@ By introducing a **strict static typing system**, Py++ eliminates runtime type i
 Py++ utilizes a strongly-typed syntax with explicit delimiters and statement termination via semicolons (`;`).
 
 ```python
-fn main() -> void {
+def main() -> void {
     let hello: string = "HELLO";
     print(hello);
 }
