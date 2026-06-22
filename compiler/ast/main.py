@@ -54,7 +54,7 @@ class Block(BaseAst):
 
 
 class VariableDeclaration(BaseStatement):
-    def __init__(self, identifier: "Identifier", type_: BaseType, expression: Any):
+    def __init__(self, identifier: "Identifier", type_: BaseType, expression: StringLiteral):
         self.name = identifier.name
         self.type_ = type_
         self.expression = expression
@@ -68,14 +68,6 @@ class VariableDeclaration(BaseStatement):
         return f"VariableDeclaration(\n{indent(content)}\n)"
 
 
-class StringLiteral(BaseType):
-    def __init__(self, value):
-        self.value = value
-
-    def __repr__(self):
-        return f"StringLiteral({self.value})"
-
-
 class VoidType(BaseType):
     def __init__(self, value):
         self.value = value
@@ -84,12 +76,20 @@ class VoidType(BaseType):
         return "Void()"
 
 
-class String:
+class String(BaseType):
     def __init__(self, value):
         self.value = value
 
     def __repr__(self):
         return f"String({self.value})"
+
+
+class StringLiteral(String):
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return f"StringLiteral({self.value})"
 
 
 class Identifier(BaseAst):

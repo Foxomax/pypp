@@ -1,0 +1,6 @@
+
+
+class PyPPSyntaxError(Exception):
+    pass
+
+

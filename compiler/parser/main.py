@@ -1,13 +1,12 @@
+from typing import TypedDict
+
 from lark import Lark
+
+from compiler.ast.base import BaseType
+from compiler.ast.main import Program, Parameter, Block, VariableDeclaration, String
 from compiler.lexer import TypeLexer
 from compiler.ast import AstBuilder
-
-
-SOURCE_CODE = """
-def main(hola: string) -> void {
-    let hello: string = "HELLO";
-}  
-"""
+from compiler.parser.exceptions import PyPPSyntaxError
 
 GRAMMAR = r"""
 start: function*
@@ -46,18 +45,62 @@ return_type: VOID
 """
 
 
-def main():
+def parse_source_code(source_code: str, /) -> Program:
     parser = Lark(
         GRAMMAR,
         parser="lalr",
         lexer=TypeLexer
     )
 
-    tree = parser.parse(SOURCE_CODE)
-    print(tree.pretty())
+    tree = parser.parse(source_code)
     ast = AstBuilder().transform(tree)
-    print(ast)
+    SyntacticAnalyzer(ast).analyze()
+    return ast
 
 
-if __name__ == "__main__":
-    main()
+class CallableTable(TypedDict):
+    identifier: str
+    return_type: BaseType
+    parameters: list[Parameter]
+
+
+class SyntacticAnalyzer:
+    AllowedTypes: list[BaseType] = [
+        String
+    ]
+
+    def __init__(self, program: Program):
+        self._callable_objects: list[dict] = []
+        self._var_table: dict = {}
+
+        self._program = program
+
+    def _init_callables_table(self):
+        for f in self._program.functions:
+            self._callable_objects.append({
+                "identifier": f.identifier,
+                "parameters": f.parameters,
+                "return_type": f.return_type
+            })
+
+    def _read_block(self, block: Block):
+        for s in block.statements:
+            if isinstance(s, VariableDeclaration):
+                if s.name in self._var_table.keys():
+                    raise PyPPSyntaxError("Error: variables redeclaration not allowed")
+                for t in self.AllowedTypes:
+                    if not isinstance(s.type_, t):
+                        raise PyPPSyntaxError(f"Error: Type {repr(s.type_)} not allowed, available types are: {[t for t in self.AllowedTypes]}")
+
+                self._var_table[s.name] = {
+                    "type": s.type_,
+                    "expression": s.expression
+                }
+                continue
+
+
+    def analyze(self):
+        self._init_callables_table()
+        for f in self._program.functions:
+            self._read_block(f.block)
+        return
