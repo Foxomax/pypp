@@ -88,9 +88,10 @@ class SyntacticAnalyzer:
             if isinstance(s, VariableDeclaration):
                 if s.name in self._var_table.keys():
                     raise PyPPSyntaxError("Error: variables redeclaration not allowed")
-                for t in self.AllowedTypes:
-                    if not isinstance(s.type_, t):
-                        raise PyPPSyntaxError(f"Error: Type {repr(s.type_)} not allowed, available types are: {[t for t in self.AllowedTypes]}")
+
+                if not any([isinstance(s.type_, t) for t in self.AllowedTypes]):
+                    raise PyPPSyntaxError(
+                        f"Error: Type {repr(s.type_)} not allowed, available types are: {[t for t in self.AllowedTypes]}")
 
                 self._var_table[s.name] = {
                     "type": s.type_,
