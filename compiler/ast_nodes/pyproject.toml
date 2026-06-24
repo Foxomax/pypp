@@ -1,17 +1,11 @@
 [project]
-name = "codegen"
+name = "ast-nodes"
 version = "0.1.0"
-description = "Generador de código para Py++"
+description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = [
-    "ast-nodes",
-    "pypp-parser",
-]
+dependencies = []
 
-[tool.uv.sources]
-ast-nodes = { workspace = true }
-pypp-parser = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]
@@ -22,7 +16,7 @@ packages = ["."]
 exclude = ["pyproject.toml", "README.md"]
 
 [tool.hatch.build.targets.wheel.sources]
-"." = "compiler/codegen"
+"." = "compiler/ast_nodes"
 
 [tool.hatch.build]
 dev-mode-dirs = ["../.."]

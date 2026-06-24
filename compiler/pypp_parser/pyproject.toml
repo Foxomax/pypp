@@ -1,17 +1,18 @@
 [project]
-name = "codegen"
+name = "pypp-parser"
 version = "0.1.0"
-description = "Generador de código para Py++"
+description = "Analizador sintáctico para Py++"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "lark>=1.3.1",
     "ast-nodes",
-    "pypp-parser",
+    "pypp-lexer",
 ]
 
 [tool.uv.sources]
 ast-nodes = { workspace = true }
-pypp-parser = { workspace = true }
+pypp-lexer = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]
@@ -22,7 +23,7 @@ packages = ["."]
 exclude = ["pyproject.toml", "README.md"]
 
 [tool.hatch.build.targets.wheel.sources]
-"." = "compiler/codegen"
+"." = "compiler/pypp_parser"
 
 [tool.hatch.build]
 dev-mode-dirs = ["../.."]

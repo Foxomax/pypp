@@ -2,11 +2,11 @@ from typing import TypedDict
 
 from lark import Lark
 
-from compiler.ast.base import BaseType
-from compiler.ast.main import Program, Parameter, Block, VariableDeclaration, String
-from compiler.lexer import TypeLexer
-from compiler.ast import AstBuilder
-from compiler.parser.exceptions import PyPPSyntaxError
+from compiler.ast_nodes.base import BaseType
+from compiler.ast_nodes.main import Program, Parameter, Block, VariableDeclaration, String
+from compiler.pypp_lexer import TypeLexer
+from compiler.ast_nodes import AstBuilder
+from .exceptions import PyPPSyntaxError
 
 GRAMMAR = r"""
 start: function*

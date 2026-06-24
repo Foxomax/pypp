@@ -27,6 +27,8 @@ class Parameter(BaseAst):
 
 
 class Function(BaseAst):
+    __match_args__ = ("identifier", "parameters", "return_type", "block")
+
     def __init__(self, identifier: "Identifier", parameters: list[Parameter], return_type: BaseType, block: "Block"):
         self.identifier = identifier
         self.parameters = parameters

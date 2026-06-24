@@ -3,13 +3,20 @@ name = "pypp"
 version = "0.1.0"
 description = "Py++ is a language writed in python, Py++ is a strict language compiled"
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.14"
+dependencies = [
+    "lark>=1.3.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
 
 [tool.uv.workspace]
 members = [
-    "compiler/parser",
-    "compiler/lexer",
-    "compiler/ast",
-    "compiler/codegen",
+    "compiler/pypp_lexer",
+    "compiler/pypp_parser",
+    "compiler/ast_nodes",
+    "compiler/codegen"
 ]
